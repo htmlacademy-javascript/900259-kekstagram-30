@@ -15,3 +15,4 @@ const checkString = (palindrom) => {
   return result;
 };
 
+
