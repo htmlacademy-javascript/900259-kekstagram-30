@@ -4,8 +4,6 @@ const checkStringLength = (string, maxLength) => {
   return result;
 };
 
-// console.log(checkStringLength('проверяемая строка', 20));
-
 
 const checkString = (palindrom) => {
   const normalazeString = palindrom.toLowerCase().replaceAll(' ','');
