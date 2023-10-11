@@ -16,3 +16,15 @@ const checkString = (palindrom) => {
 };
 
 
+const makeNumber = (string) => {
+  const exactString = string.toString();
+  let newNumber = '';
+
+  for (let i = 0; i < exactString.length; i++) {
+    if (!Number.isNaN(parseInt(exactString[i], 10))) {
+      newNumber += exactString[i];
+    }
+  }
+  return parseInt(newNumber, 10);
+};
+
