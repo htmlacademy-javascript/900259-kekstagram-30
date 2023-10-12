@@ -15,4 +15,21 @@ const checkString = (palindrom) => {
   return result;
 };
 
+const checkString2 = (palindrom) => {
+  const normalazeString = palindrom.toLowerCase().replaceAll(' ','');
+  const newStringReverse = Array.from(normalazeString);
+  const result = normalazeString === newStringReverse.reverse().join('');
+  return result;
+};
+
+const makeNumber = (string) => {
+  const exactString = string.toString();
+  let newNumber = '';
+  for (let i = 0; i < exactString.length; i++) {
+    if (!Number.isNaN(parseInt(exactString[i], 10))) {
+      newNumber += exactString[i];
+    }
+  }
+  return parseInt(newNumber, 10);
+};
 
