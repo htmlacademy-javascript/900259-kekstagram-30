@@ -4,7 +4,6 @@ const checkStringLength = (string, maxLength) => {
   return result;
 };
 
-
 const checkString = (palindrom) => {
   const normalazeString = palindrom.toLowerCase().replaceAll(' ','');
   let newStringReverse = '';
