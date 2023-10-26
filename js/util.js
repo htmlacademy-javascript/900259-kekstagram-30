@@ -15,7 +15,5 @@ const createRandomId = () => {
   };
 };
 
-export {getRandomArrayElement};
-export {getRandomInteger};
-export {createRandomId};
+export {getRandomArrayElement, getRandomInteger, createRandomId};
 
