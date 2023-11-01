@@ -100,3 +100,5 @@ const createPhotoDescription = () => ({
 const getPhotos = () => Array.from({length: PHOTO_COUNT}, createPhotoDescription);
 
 export {getPhotos};
+
+
