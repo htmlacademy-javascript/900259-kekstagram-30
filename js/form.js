@@ -1,11 +1,16 @@
 import { isEscapeKey } from './util.js';
+import {
+  init as initEffect,
+  reset as resetEffect
+} from './effect.js';
+import { resetScale } from './scale.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const ErrorText = {
   INVALID_COUNT: `Максимум ${MAX_HASHTAG_COUNT} хэштегов`,
   NOT_UNIQUE: 'Хэштеги должны быть уникальными',
-  INVALID_PATTERN: 'Неправильный хэштег'
+  INVALID_PATTERN: 'Хэштеги должен начинаться c #, состоять из букв и чисел без пробелов, длинной до 20 символов'
 };
 
 const body = document.querySelector('body');
@@ -30,6 +35,8 @@ const showModal = () => {
 
 const hideModal = () => {
   form.reset();
+  resetScale();
+  resetEffect();
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -73,30 +80,35 @@ const onFormSubmit = (evt) => {
   pristine.validate();
 };
 
-pristine.addValidator(
-  hashtagField,
-  hasValidTags,
-  ErrorText.INVALID_PATTERN,
-  1,
-  true
-);
+const validateForm = () => {
+  pristine.addValidator(
+    hashtagField,
+    hasValidTags,
+    ErrorText.INVALID_PATTERN,
+    1,
+    true,
+  );
 
-pristine.addValidator(
-  hashtagField,
-  hasUniqueTags,
-  ErrorText.INVALID_COUNT,
-  2,
-  true
-);
+  pristine.addValidator(
+    hashtagField,
+    hasValidCount,
+    ErrorText.INVALID_COUNT,
+    3,
+    true,
+  );
 
-pristine.addValidator(
-  hashtagField,
-  hasValidCount,
-  ErrorText.NOT_UNIQUE,
-  3,
-  true
-);
+  pristine.addValidator(
+    hashtagField,
+    hasUniqueTags,
+    ErrorText.NOT_UNIQUE,
+    2,
+    true,
+  );
 
-fileField.addEventListener('change', onFileInputChange);
-cancelButton.addEventListener('click', onCancelButtonClick);
-form.addEventListener('submit', onFormSubmit);
+  fileField.addEventListener('change', onFileInputChange);
+  cancelButton.addEventListener('click', onCancelButtonClick);
+  form.addEventListener('submit', onFormSubmit);
+  initEffect();
+};
+
+export {validateForm};
