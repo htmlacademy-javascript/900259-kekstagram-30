@@ -1,4 +1,6 @@
-import {getPhotos} from './data.js';
+import { getPhotos } from './data.js';
 import { renderGallery } from './gallery.js';
-import './form.js';
+import {validateForm} from './form.js';
+
 renderGallery(getPhotos());
+validateForm();
