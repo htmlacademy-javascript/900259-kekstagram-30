@@ -80,7 +80,7 @@ const onFormSubmit = (evt) => {
   pristine.validate();
 };
 
-const validateForm = () => {
+const initvalidateForm = () => {
   pristine.addValidator(
     hashtagField,
     hasValidTags,
@@ -111,4 +111,4 @@ const validateForm = () => {
   initEffect();
 };
 
-export {validateForm};
+export {initvalidateForm};
