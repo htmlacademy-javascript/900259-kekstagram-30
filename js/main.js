@@ -1,5 +1,5 @@
 import { renderGallery } from './gallery.js';
-import { initvalidateForm } from './form.js';
+import { initValidateForm } from './form.js';
 import { loadPictures } from './api.js';
 import { showErrorMessage } from './util.js';
 
@@ -13,6 +13,6 @@ const bootstrap = async () => {
 
 };
 
-initvalidateForm();
+initValidateForm();
 
 bootstrap();

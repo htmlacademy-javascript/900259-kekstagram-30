@@ -1,4 +1,5 @@
-/* eslint-disable no-use-before-define */
+import { isEscapeKey } from './util.js';
+
 const successMessageElement = document
   .querySelector('#success')
   .content
@@ -20,19 +21,19 @@ const onCloseButtonClick = () => {
   hideMessage();
 };
 
-const onDocumentKeydown = (evt) => {
-  if (evt.key === 'Escape') {
+function onDocumentKeydown (evt) {
+  if (isEscapeKey(evt)) {
     evt.preventDefault();
     hideMessage();
   }
-};
+}
 
-const onBodyClick = (evt) => {
+function onBodyClick (evt) {
   if (evt.target.closest('.success__inner') || (evt.target.closest('.error__inner'))) {
     return;
   }
   hideMessage();
-};
+}
 
 const showMessage = (element, buttonClass) => {
   document.body.append(element);
