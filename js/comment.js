@@ -16,7 +16,6 @@ const createComment = ({avatar, message, name}) => {
 };
 
 const renderComments = (comments) => {
-//TODO отрисовка комментариев
   commenstListElement.innerHTML = '';
   const fragment = document.createDocumentFragment();
   comments.forEach((item) => {
