@@ -7,6 +7,7 @@ import { resetScale } from './scale.js';
 import { sendPictures } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './message.js';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 const ErrorText = {
@@ -28,6 +29,8 @@ const cancelButton = form.querySelector('.img-upload__cancel');
 const hashtagField = form.querySelector('.text__hashtags');
 const commentField = form.querySelector('.text__description');
 const submitButton = form.querySelector('.img-upload__submit');
+const photoPreview = document.querySelector('.img-upload__preview img');
+const effectsPreview = document.querySelectorAll('.effects__preview');
 
 const toggleSubmitButton = (isDisabled) => {
   submitButton.disabled = isDisabled;
@@ -61,6 +64,13 @@ const hideModal = () => {
 const isTextFieldFocused = () =>
   document.activeElement === hashtagField || document.activeElement === commentField;
 
+const isValidType = (file) => {
+  const fileName = file.name.toLowerCase();
+  const fileExtension = FILE_TYPES.map((type) => type.toLowerCase());
+
+  return fileExtension.includes(fileName.split('.').pop());
+};
+
 const normalizeTags = (tagString) => tagString
   .trim()
   .split(' ')
@@ -89,6 +99,14 @@ const onCancelButtonClick = () => {
 };
 
 const onFileInputChange = () => {
+  const file = fileField.files[0];
+
+  if (file && isValidType(file)) {
+    photoPreview.src = URL.createObjectURL(file);
+    effectsPreview.forEach((preview) => {
+      preview.style.backgroundImage = `url('${photoPreview.src}')`;
+    });
+  }
   showModal();
 };
 const sendForm = async (formElement) => {
