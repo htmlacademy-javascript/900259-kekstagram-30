@@ -10,7 +10,9 @@ const commentsListElement = bigPictureElement.querySelector('.social__comments')
 const commentsTotalElement = bigPictureElement.querySelector('.social__comment-total-count');
 const commentCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
-const commentElement = document.querySelector('#comment').content.querySelector('.social__comment');
+const commentElement = document.querySelector('#comment')
+  .content
+  .querySelector('.social__comment');
 
 let commentsCountShown = 0;
 let comments = [];
