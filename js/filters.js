@@ -1,11 +1,11 @@
 import { renderGallery } from './gallery.js';
 import { debounce } from './util.js';
 
-const filtersEl = document.querySelector('.img-filters');
-const filterForm = document.querySelector('.img-filters__form');
-const defaultButton = filterForm.querySelector('#filter-default');
-const randomButton = filterForm.querySelector('#filter-random');
-const discussedButton = filterForm.querySelector('#filter-discussed');
+const filtersElements = document.querySelector('.img-filters');
+const filterFormElement = document.querySelector('.img-filters__form');
+const defaultButtonElement = filterFormElement.querySelector('#filter-default');
+const randomButtonElement = filterFormElement.querySelector('#filter-random');
+const discussedButtonElement = filterFormElement.querySelector('#filter-discussed');
 
 const MAX_RANDOM_FILTER = 10;
 
@@ -17,7 +17,7 @@ const filterEnum = {
 
 const getRandomIndex = (min, max) => Math.floor(Math.random() * (max - min));
 
-const filterHandlers = {
+const filterHandlerMap = {
   [filterEnum.DEFAULT]: (data) => data,
   [filterEnum.RANDOM]: (data) => {
     const randomIndexList = [];
@@ -37,10 +37,10 @@ let currentFilter = filterEnum.DEFAULT;
 
 const repaint = (evt, filter, data) => {
   if (currentFilter !== filter) {
-    const filterdData = filterHandlers[filter](data);
+    const filteredData = filterHandlerMap[filter](data);
     const pictures = document.querySelectorAll('.picture');
     pictures.forEach((item) => item.remove());
-    renderGallery(filterdData);
+    renderGallery(filteredData);
     currentFilter = filter;
   }
 };
@@ -48,21 +48,21 @@ const repaint = (evt, filter, data) => {
 const debounceRepaint = debounce(repaint);
 
 const initFilter = (data) => {
-  filtersEl.classList.remove('img-filters--inactive');
-  defaultButton.addEventListener('click', (evt) => {
-    const currentActiveEL = filterForm.querySelector('.img-filters__button--active');
+  filtersElements.classList.remove('img-filters--inactive');
+  defaultButtonElement.addEventListener('click', (evt) => {
+    const currentActiveEL = filterFormElement.querySelector('.img-filters__button--active');
     currentActiveEL.classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
     debounceRepaint(evt, filterEnum.DEFAULT, data);
   });
-  randomButton.addEventListener('click', (evt) => {
-    const currentActiveEL = filterForm.querySelector('.img-filters__button--active');
+  randomButtonElement.addEventListener('click', (evt) => {
+    const currentActiveEL = filterFormElement.querySelector('.img-filters__button--active');
     currentActiveEL.classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
     debounceRepaint(evt, filterEnum.RANDOM, data);
   });
-  discussedButton.addEventListener('click', (evt) => {
-    const currentActiveEL = filterForm.querySelector('.img-filters__button--active');
+  discussedButtonElement.addEventListener('click', (evt) => {
+    const currentActiveEL = filterFormElement.querySelector('.img-filters__button--active');
     currentActiveEL.classList.remove('img-filters__button--active');
     evt.target.classList.add('img-filters__button--active');
     debounceRepaint(evt, filterEnum.DISCUSSED, data);
