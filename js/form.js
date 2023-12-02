@@ -30,7 +30,7 @@ const hashtagField = form.querySelector('.text__hashtags');
 const commentField = form.querySelector('.text__description');
 const submitButton = form.querySelector('.img-upload__submit');
 const photoPreview = document.querySelector('.img-upload__preview img');
-const effectsPreview = document.querySelectorAll('.effects__preview');
+const effectPreview = document.querySelectorAll('.effects__preview');
 
 const toggleSubmitButton = (isDisabled) => {
   submitButton.disabled = isDisabled;
@@ -103,7 +103,7 @@ const onFileInputChange = () => {
 
   if (file && isValidType(file)) {
     photoPreview.src = URL.createObjectURL(file);
-    effectsPreview.forEach((preview) => {
+    effectPreview.forEach((preview) => {
       preview.style.backgroundImage = `url('${photoPreview.src}')`;
     });
   }

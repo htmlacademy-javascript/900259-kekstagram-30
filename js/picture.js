@@ -6,7 +6,7 @@ const bigPictureElement = document.querySelector('.big-picture');
 const bodyElement = document.querySelector('body');
 const closeBigPicture = bigPictureElement.querySelector('.big-picture__cancel');
 
-const commenstListElement = bigPictureElement.querySelector('.social__comments');
+const commentsListElement = bigPictureElement.querySelector('.social__comments');
 const commentsTotalElement = bigPictureElement.querySelector('.social__comment-total-count');
 const commentCountElement = bigPictureElement.querySelector('.social__comment-shown-count');
 const commentsLoaderElement = bigPictureElement.querySelector('.comments-loader');
@@ -41,11 +41,11 @@ const renderComments = () => {
     const comment = createComment(comments[i]);
     fragment.append(comment);
   }
-  commenstListElement.innerHTML = '';
-  commenstListElement.append(fragment);
+  commentsListElement.innerHTML = '';
+  commentsListElement.append(fragment);
 
   commentCountElement.textContent = commentsCountShown;
-  commentsTotalElement.textContent = comments.length;
+  commentsTotalElement.textContent = String(comments.length);
 
 };
 
